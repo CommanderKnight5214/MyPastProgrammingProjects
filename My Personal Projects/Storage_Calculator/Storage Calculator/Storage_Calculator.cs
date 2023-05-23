@@ -12,41 +12,11 @@ namespace Storage_Calculator
 {
     public partial class Form1 : Form
     {
-        String Unit1 = "";
-        String Unit2 = "";
-        String IntialNumberAfterConversion = "";
-        String TotalAfterFractionConversion = "";
         String Abrevation = "";
-        String CountConversion = "";
-        String FileToSubtractPrint = "";
-        String FileAdderRunningTotalString = "";
-        String TempDisplay = "";
-        String TextToUndo = "";
-        String IntialNumberBC = "";
-        String ResultNumberAC = "";
-        String IntialNumberBF = "";
-        String IntialNumberAF = "";
-        String OneFileSizeNumber = "";
-        String FileAdderTotalStorage = "";
-        String Abreviation = "";
         String[] UnitListFullname = new string[5];
         String[] UnitListAbrivated = new string[5];
         String[] FilesEnteredStringStorage = new string[1000];
-        Double IntialNumberBeforeConversion = 0;
-        Double NumberToConvert = 0;
-        Double TotalBeforeFractionCalculation = 0;
         Double FileAdderRunningTotal = 0;
-        Double FileToSubtract = 0;
-        Double NumberToUndo = 0;
-        Double Fraction90 = 0.90;
-        Double Fraction80 = 0.80;
-        Double Fraction70 = 0.70;
-        Double Fraction60 = 0.60;
-        Double Fraction50 = 0.50;
-        Double Fraction40 = 0.40;
-        Double Fraction30 = 0.30;
-        Double Fraction20 = 0.20;
-        Double Fraction10 = 0.10;
         Double[] FilesEnteredDoubleStorage = new Double[1000];
         int UnitConversionCompleted = 0;
         int WholeUnitOption = 1;
@@ -105,30 +75,24 @@ namespace Storage_Calculator
         {
             try
             {
-                Unit1 = this.UnitDropDown1.Text;
-                Unit2 = this.UnitDropDown2.Text;
-                Unit1Count = UnitFinderFunctionPlace(UnitListFullname, Unit1, Unit1Count);
-                Unit2Count = UnitFinderFunctionPlace(UnitListFullname, Unit2, Unit2Count);
-                IntialNumberBeforeConversion = Convert.ToDouble(this.UnitConversionBeforeConversionTextBox.Text);
-                if(Unit1 == "" && Unit2 == "")
-                {
+                String _unit1 = this.UnitDropDown1.Text;
+                String _unit2 = this.UnitDropDown2.Text;
+                Unit1Count = UnitFinderFunctionPlace(UnitListFullname, _unit1, Unit1Count);
+                Unit2Count = UnitFinderFunctionPlace(UnitListFullname, _unit2, Unit2Count);
+                Double IntialNumberBeforeConversion = Convert.ToDouble(this.UnitConversionBeforeConversionTextBox.Text);
+                if(_unit1 == "" && _unit2 == "")
                     MessageBox.Show("Please select two different units before converting.", "No Units!");
-                }
-                else if (Unit1 == "" || Unit2 == "")
-                {
+                else if (_unit1 == "" || _unit2 == "")
                     MessageBox.Show("A unit is missing. Please select two " + "\n" + "different units before converting.", "Unit Missing!");
-                }
                 else if(Unit1Count == Unit2Count)
-                {
                     MessageBox.Show("You cannot convert with the same unit.", "Cannot Convert!");
-                }
                 else
                 {
-                    NumberToConvert = UnitConversionFunction(Unit1Count, Unit2Count, IntialNumberBeforeConversion, MethodOfConversion);
+                    Double NumberToConvert = UnitConversionFunction(Unit1Count, Unit2Count, IntialNumberBeforeConversion, MethodOfConversion);
                     Abrevation = UnitAbrevationFinderFunction(Abrevation, Unit2Count);
-                    IntialNumberAfterConversion = Convert.ToString(NumberToConvert);
-                    this.UnitConversionResultTextBox.Text = IntialNumberAfterConversion + " " + Abrevation;
-                    this.TotalStorageBeforeFractionTextBox.Text = IntialNumberAfterConversion;
+                    String _intialNumberAfterConversion = Convert.ToString(NumberToConvert);
+                    this.UnitConversionResultTextBox.Text = _intialNumberAfterConversion + " " + Abrevation;
+                    this.TotalStorageBeforeFractionTextBox.Text = _intialNumberAfterConversion;
                     UnitConversionCompleted = 1;
                     WholeUnitOption = 0;
                     this.StoragePercentageUnitTextBox.ReadOnly = true;
@@ -151,9 +115,7 @@ namespace Storage_Calculator
         {
             if (UnitConversionCompleted == 0 && this.TotalStorageBeforeFractionTextBox.Text == ""
                 && this.StoragePercentageUnitTextBox.Text == "")
-            {
                 UnitConversionFractionErrorMessage();
-            }
             else
             {
                 check = UnitCheckerFunction(this.StoragePercentageUnitTextBox.Text, UnitListAbrivated);
@@ -167,62 +129,59 @@ namespace Storage_Calculator
                     StoragePercentageCompleted = 1;
                     if (WholeUnitOption == 1)
                     {
-                        Unit1 = this.StoragePercentageUnitTextBox.Text;
-                        Unit1Count = UnitFinderFunctionPlace(UnitListFullname, Unit1, Unit1Count);
+                        Unit1Count = UnitFinderFunctionPlace(UnitListFullname, this.StoragePercentageResultTextBox.Text, Unit1Count);
                         Unit2Count = Unit1Count;
                         this.FileAdderTotalStorageLabel.Text = this.StoragePercentageUnitTextBox.Text;
                     }
                 }
                 else
-                {
                     InvalidUnitTypeErrorMessage();
-                }
             }
         }
 
         private void Fraction90Button_Click(object sender, EventArgs e)
         {
-            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, Fraction90);
+            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, 0.90);
         }
 
         private void Fraction80Button_Click(object sender, EventArgs e)
         {
-            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, Fraction80);
+            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, 0.80);
         }
 
         private void Fraction70Button_Click(object sender, EventArgs e)
         {
-            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, Fraction70);
+            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, 0.70);
         }
 
         private void Fraction60Button_Click(object sender, EventArgs e)
         {
-            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, Fraction60);
+            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, 0.60);
         }
 
         private void Fraction50Button_Click(object sender, EventArgs e)
         {
-            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, Fraction50);
+            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, 0.50);
         }
 
         private void Fraction40Button_Click(object sender, EventArgs e)
         {
-            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, Fraction40);
+            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, 0.40);
         }
 
         private void Fraction30Button_Click(object sender, EventArgs e)
         {
-            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, Fraction30);
+            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, 0.30);
         }
 
         private void Fraction20Button_Click(object sender, EventArgs e)
         {
-            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, Fraction20);
+            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, 0.20);
         }
 
         private void Fraction10Button_Click(object sender, EventArgs e)
         {
-            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, Fraction10);
+            FractionCalculationFunction(this.TotalStorageBeforeFractionTextBox.Text, 0.10);
         }
 
         private void ClearLockButton_Click(object sender, EventArgs e)
@@ -274,18 +233,11 @@ namespace Storage_Calculator
         private void UndoButton_Click(object sender, EventArgs e)
         {
             if (UnitConversionCompleted == 0 && StoragePercentageCompleted == 0)
-            {
                 UnitConversionFractionErrorMessage();
-            }
-
             else if (StoragePercentageCompleted == 0)
-            {
                 FractionErrorMessage();
-            }
             else if(IntializeCountRichTextBox == 0)
-            {
                 MessageBox.Show("There are no File Sizes Entered to undo", "Nothing to Undo!");
-            }
             else
             {
                 IntializeCountRichTextBox = 1;
@@ -299,8 +251,8 @@ namespace Storage_Calculator
                 }
                 else
                 {
-                    NumberToUndo = FilesEnteredDoubleStorage[Count];
-                    TextToUndo = FilesEnteredStringStorage[Count];
+                    Double NumberToUndo = FilesEnteredDoubleStorage[Count];
+                    String TextToUndo = FilesEnteredStringStorage[Count];
                     FilesEnteredDoubleStorage[Count] = 0;
                     FilesEnteredStringStorage[Count] = "";
                     FileAdderRunningTotal = FileAdderRunningTotal + NumberToUndo;
@@ -321,9 +273,7 @@ namespace Storage_Calculator
             for(int i = 0; i < ArrayList.Length; i++)
             {
                 if(ArrayList[i] == unit)
-                {
                     Count = i;
-                }
             }
             return Count;
         }
@@ -374,35 +324,30 @@ namespace Storage_Calculator
         {
             if (UnitConversionCompleted == 0 && this.TotalStorageBeforeFractionTextBox.Text == "" 
                 && this.StoragePercentageUnitTextBox.Text == "")
-            {
                 UnitConversionFractionErrorMessage();
-            }
             else
             {
                 check = UnitCheckerFunction(this.StoragePercentageUnitTextBox.Text, UnitListAbrivated);
                 if(check == true)
                 {
-                    TotalBeforeFractionCalculation = Convert.ToDouble(Total);
+                    Double TotalBeforeFractionCalculation = Convert.ToDouble(Total);
                     TotalBeforeFractionCalculation = TotalBeforeFractionCalculation * FractionIdentifier;
-                    TotalAfterFractionConversion = Convert.ToString(TotalBeforeFractionCalculation);
-                    this.StoragePercentageResultTextBox.Text = TotalAfterFractionConversion + " " + Abrevation;
-                    this.FileAdderStorageTextBox.Text = TotalAfterFractionConversion;
+                    String _totalAfterFractionConversion = Convert.ToString(TotalBeforeFractionCalculation);
+                    this.StoragePercentageResultTextBox.Text = _totalAfterFractionConversion + " " + Abrevation;
+                    this.FileAdderStorageTextBox.Text = _totalAfterFractionConversion;
                     FileAdderRunningTotal = Convert.ToDouble(this.FileAdderStorageTextBox.Text);
                     this.FileAdderStorageTextBox.ForeColor = Color.Green;
                     StoragePercentageCompleted = 1;
                     this.UnitConversionBeforeConversionTextBox.ReadOnly = true;
                     if (WholeUnitOption == 1)
                     {
-                        Unit1 = this.StoragePercentageUnitTextBox.Text;
-                        Unit1Count = UnitFinderFunctionPlace(UnitListFullname, Unit1, Unit1Count);
+                        Unit1Count = UnitFinderFunctionPlace(UnitListFullname, this.StoragePercentageUnitTextBox.Text, Unit1Count);
                         Unit2Count = Unit1Count;
                         this.FileAdderTotalStorageLabel.Text = this.StoragePercentageUnitTextBox.Text;
                     }
                 }
                 else
-                {
                     InvalidUnitTypeErrorMessage();
-                }
                 
             }
         }
@@ -422,13 +367,9 @@ namespace Storage_Calculator
         private void EnterFunction()
         {
             if(UnitConversionCompleted == 0 && StoragePercentageCompleted == 0)
-            {
                 UnitConversionFractionErrorMessage();
-            }
             else if (StoragePercentageCompleted == 0)
-            {
                 FractionErrorMessage();
-            }
             else
             {
                 if(this.OneFileSizeTextBox.Text == "" && this.OneFileSizeUnitTextBox.Text == "")
@@ -448,7 +389,7 @@ namespace Storage_Calculator
                 }
                 else
                 {
-                    FileToSubtract = Convert.ToDouble(this.OneFileSizeTextBox.Text);
+                    Double FileToSubtract = Convert.ToDouble(this.OneFileSizeTextBox.Text);
                     if (this.OneFileSizeUnitTextBox.Text != this.FileAdderTotalStorageLabel.Text)
                     {
                         Unit1Count = UnitFinderFunctionPlace(UnitListAbrivated, this.OneFileSizeUnitTextBox.Text, Unit1Count);
@@ -458,10 +399,10 @@ namespace Storage_Calculator
                     if (check == true)
                     {
                         FileAdderRunningTotal = FileAdderRunningTotal - FileToSubtract;
-                        FileAdderRunningTotalString = Convert.ToString(FileAdderRunningTotal);
-                        CountConversion = Convert.ToString(ListCount);
-                        FileToSubtractPrint = Convert.ToString(FileToSubtract);
-                        TempDisplay = CountConversion + ". " + FileToSubtractPrint + " " + Abrevation + "\n";
+                        String FileAdderRunningTotalString = Convert.ToString(FileAdderRunningTotal);
+                        String CountConversion = Convert.ToString(ListCount);
+                        String FileToSubtractPrint = Convert.ToString(FileToSubtract);
+                        String TempDisplay = CountConversion + ". " + FileToSubtractPrint + " " + Abrevation + "\n";
                         FilesEnteredDoubleStorage[Count] = FileToSubtract;
                         FilesEnteredStringStorage[Count] = TempDisplay;
                         this.FileSizesEnteredRichTextBox.Text = this.FileSizesEnteredRichTextBox.Text + TempDisplay;
@@ -492,9 +433,7 @@ namespace Storage_Calculator
                         ListCount++;
                     }
                     else
-                    {
                         InvalidUnitTypeErrorMessage();
-                    }
                 }
             }
         }
@@ -502,9 +441,7 @@ namespace Storage_Calculator
         private void FileAdderTextChangeFunction(Double RunningTotal)
         {
             if (RunningTotal > 0)
-            {
                 this.FileAdderStorageTextBox.ForeColor = Color.Green;
-            }
             else if (RunningTotal < 0)
             {
                 this.FileAdderStorageTextBox.Text = "-" + RunningTotal;
@@ -540,15 +477,11 @@ namespace Storage_Calculator
         private void UnitConversionBeforeConversionTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
                 e.Handled = true;
-            }
 
             // only allow one decimal point
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
                 e.Handled = true;
-            }
         }
 
         private void UnitConversionResultTextBox_TextChanged(object sender, EventArgs e)
@@ -564,15 +497,11 @@ namespace Storage_Calculator
         private void TotalStorageBeforeFractionTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
                 e.Handled = true;
-            }
 
             // only allow one decimal point
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
                 e.Handled = true;
-            }
         }
 
         private void StoragePercentageUnitTextBox_TextChanged(object sender, EventArgs e)
@@ -587,16 +516,15 @@ namespace Storage_Calculator
 
         private void StoragePercentageUnitTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == (char)8 || e.KeyChar == (char)66 || e.KeyChar == (char)101 || e.KeyChar == (char)71
+            if (e.KeyChar == (char)8 || e.KeyChar == (char)66 || e.KeyChar == (char)101 || e.KeyChar == (char)71
                 || e.KeyChar == (char)75 || e.KeyChar == (char)77 || e.KeyChar == (char)115 || e.KeyChar == (char)115
                 || e.KeyChar == (char)84 || e.KeyChar == (char)116 || e.KeyChar == (char)121)
             {
-                
+
             }
+
             else
-            {
                 e.Handled = true;
-            }
         }
 
         private void FileAdderStorageTextBox_TextChanged(object sender, EventArgs e)
@@ -612,15 +540,11 @@ namespace Storage_Calculator
         private void OneFileSizeTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
                 e.Handled = true;
-            }
 
             // only allow one decimal point
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
                 e.Handled = true;
-            }
 
             if (e.KeyChar == (char)13)
             {
@@ -647,10 +571,9 @@ namespace Storage_Calculator
             {
 
             }
+
             else
-            {
                 e.Handled = true;
-            }
         }
 
         private void FileSizesEnteredRichTextBox_TextChanged(object sender, EventArgs e)

@@ -18,3 +18,4 @@ D:\GitHub Repository\MyPastProgrammingProjects\My Personal Projects\Storage_Calc
 D:\GitHub Repository\MyPastProgrammingProjects\My Personal Projects\Storage_Calculator\Storage Calculator\obj\Debug\Storage Calculator.exe
 D:\GitHub Repository\MyPastProgrammingProjects\My Personal Projects\Storage_Calculator\Storage Calculator\obj\Debug\Storage Calculator.pdb
 D:\GitHub Repository\MyPastProgrammingProjects\My Personal Projects\Storage_Calculator\Storage Calculator\obj\Debug\Storage Calculator.csproj.AssemblyReference.cache
+D:\GitHub Repository\MyPastProgrammingProjects\My Personal Projects\Storage_Calculator\Storage Calculator\obj\Debug\Storage Calculator.csproj.SuggestedBindingRedirects.cache
